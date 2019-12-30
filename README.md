@@ -18,9 +18,11 @@ module "app" {
 
 ```hcl
 module "app" {
-  source          = "jungopro/app/azuread"
-  app_name        = "mycustomApp
-  identifier_urls = ["http://app.domain.com","http://my.domain.com"]
-  reply_urls      = ["http://app.domain.com","http://my.domain.com"]
+  source                = "jungopro/app/azuread"
+  app_name              = "mycustomApp
+  identifier_urls       = ["http://app.domain.com","http://my.domain.com"]
+  reply_urls            = ["http://app.domain.com","http://my.domain.com"]
+  generate_spn_password = false # supply your own value in the next key
+  spn_password          = "MySecret$pnPassw0rD!"
 }
 ```

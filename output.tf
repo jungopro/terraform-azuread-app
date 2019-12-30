@@ -25,3 +25,8 @@ output "spn_display_name" {
 output "spn_passowrd_id" {
   value = azuread_service_principal_password.spn_password.id
 }
+
+output "spn_passowrd" {
+  sensitive = true
+  value = var.generate_spn_password ? random_password.spn_password.result : var.spn_password
+}

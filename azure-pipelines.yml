@@ -49,7 +49,47 @@ steps:
     ARM_CLIENT_ID: $(ARM_CLIENT_ID)
     ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
     ARM_TENANT_ID: $(ARM_TENANT_ID)
+- script: 'terraform output'
+  workingDirectory: '$(Build.SourcesDirectory)'
+  displayName: 'Show Outputs (Terraform output)'
+  env:
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
 - script: 'terraform destroy -auto-approve'
+  workingDirectory: '$(Build.SourcesDirectory)'
+  displayName: 'Terraform Destroy'
+  env:
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+- script: 'terraform plan -var=generate_spn_password=false -var=spn_password="MySecret$pnPassw0rD!"'
+  workingDirectory: '$(Build.SourcesDirectory)'
+  displayName: 'Terraform Dry Run (Plan)'
+  env:
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+- script: 'terraform apply -var=generate_spn_password=false -var=spn_password="MySecret$pnPassw0rD!" -auto-approve'
+  workingDirectory: '$(Build.SourcesDirectory)'
+  displayName: 'Terraform Run (Apply)'
+  env:
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+- script: 'terraform output'
+  workingDirectory: '$(Build.SourcesDirectory)'
+  displayName: 'Show Outputs (Terraform output)'
+  env:
+    ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+    ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+    ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+    ARM_TENANT_ID: $(ARM_TENANT_ID)
+- script: 'terraform destroy -var=generate_spn_password=false -var=spn_password="MySecret$pnPassw0rD!" -auto-approve'
   workingDirectory: '$(Build.SourcesDirectory)'
   displayName: 'Terraform Destroy'
   env:

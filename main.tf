@@ -23,6 +23,6 @@ resource "random_password" "spn_password" {
 
 resource "azuread_service_principal_password" "spn_password" {
   service_principal_id = azuread_service_principal.app_spn.id
-  value                = random_password.spn_password.result
+  value                = var.generate_spn_password ? random_password.spn_password.result : var.spn_password
   end_date_relative    = "87600h"
 }
